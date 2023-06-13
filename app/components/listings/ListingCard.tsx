@@ -45,17 +45,13 @@ const ListingCard: React.FC<ListingCardProps> = ({
   );
 
   const price = useMemo(() => {
-    if (reservation) {
-      return reservation.totalPrice;
-    }
+    if (reservation) return reservation.totalPrice;
 
     return data.price;
   }, [reservation, data.price]);
 
   const reservationDate = useMemo(() => {
-    if (!reservation) {
-      return null;
-    }
+    if (!reservation) return null;
 
     const start = new Date(reservation.startDate);
     const end = new Date(reservation.endDate);

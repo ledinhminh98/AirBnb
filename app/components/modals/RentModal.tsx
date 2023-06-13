@@ -87,10 +87,7 @@ const RentModal = () => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if (step !== STEPS.PRICE) {
-      return onNext();
-    }
-
+    if (step !== STEPS.PRICE) return onNext();
     setIsLoading(true);
 
     axios
@@ -111,17 +108,13 @@ const RentModal = () => {
   };
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.PRICE) {
-      return "Create";
-    }
+    if (step === STEPS.PRICE) return "Create";
 
     return "Next";
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
-    if (step === STEPS.CATEGORY) {
-      return undefined;
-    }
+    if (step === STEPS.CATEGORY) return undefined;
 
     return "Back";
   }, [step]);
