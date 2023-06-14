@@ -55,15 +55,11 @@ const SearchModal = () => {
   }, []);
 
   const onSubmit = useCallback(async () => {
-    if (step !== STEPS.INFO) {
-      return onNext();
-    }
+    if (step !== STEPS.INFO) return onNext();
 
     let currentQuery = {};
 
-    if (params) {
-      currentQuery = qs.parse(params.toString());
-    }
+    if (params) currentQuery = qs.parse(params.toString());
 
     const updatedQuery: any = {
       ...currentQuery,
@@ -73,13 +69,10 @@ const SearchModal = () => {
       bathroomCount,
     };
 
-    if (dateRange.startDate) {
+    if (dateRange.startDate)
       updatedQuery.startDate = formatISO(dateRange.startDate);
-    }
 
-    if (dateRange.endDate) {
-      updatedQuery.endDate = formatISO(dateRange.endDate);
-    }
+    if (dateRange.endDate) updatedQuery.endDate = formatISO(dateRange.endDate);
 
     const url = qs.stringifyUrl(
       {
@@ -106,17 +99,13 @@ const SearchModal = () => {
   ]);
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.INFO) {
-      return "Search";
-    }
+    if (step === STEPS.INFO) return "Search";
 
     return "Next";
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
-    if (step === STEPS.LOCATION) {
-      return undefined;
-    }
+    if (step === STEPS.LOCATION) return undefined;
 
     return "Back";
   }, [step]);

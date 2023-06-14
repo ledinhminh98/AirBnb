@@ -19,9 +19,7 @@ const Search = () => {
   const guestCount = params?.get("guestCount");
 
   const locationLabel = useMemo(() => {
-    if (locationValue) {
-      return getByValue(locationValue as string)?.label;
-    }
+    if (locationValue) return getByValue(locationValue as string)?.label;
 
     return "Anywhere";
   }, [locationValue, getByValue]);
@@ -32,9 +30,7 @@ const Search = () => {
       const end = new Date(endDate as string);
       let diff = differenceInDays(end, start);
 
-      if (diff === 0) {
-        diff = 1;
-      }
+      if (diff === 0) diff = 1;
 
       return `${diff} Days`;
     }
@@ -43,9 +39,7 @@ const Search = () => {
   }, [startDate, endDate]);
 
   const guestLabel = useMemo(() => {
-    if (guestCount) {
-      return `${guestCount} Guests`;
-    }
+    if (guestCount) return `${guestCount} Guests`;
 
     return "Add Guests";
   }, [guestCount]);
