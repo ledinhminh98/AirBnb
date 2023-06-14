@@ -7,12 +7,12 @@ import { SafeUser } from "@/app/types";
 
 import useLoginModal from "./useLoginModal";
 
-interface IUseFavorite {
+interface FavoriteStore {
   listingId: string;
   currentUser?: SafeUser | null;
 }
 
-const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
+const useFavorite = ({ listingId, currentUser }: FavoriteStore) => {
   const router = useRouter();
   const loginModal = useLoginModal();
 
@@ -29,13 +29,9 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
       if (!currentUser) return loginModal.onOpen();
 
       try {
-        let request;
-
-        if (hasFavorited) {
-          request = () => axios.delete(`/api/favorites/${listingId}`);
-        } else {
-          request = () => axios.post(`/api/favorites/${listingId}`);
-        }
+        const request = hasFavorited
+          ? () => axios.delete(`/api/favorites/${listingId}`)
+          : () => axios.post(`/api/favorites/${listingId}`);
 
         await request();
         router.refresh();
